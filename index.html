@@ -944,7 +944,7 @@
         $("#waBtn").on("click", function () {
           if ($(this).attr("href") === "#") return;
 
-          fbq("track", "Contact", {
+          fbq("track", "InitiateCheckout", {
             content_name: "Pesan Nametag Custom via WhatsApp",
             value: state.qty * state.unitPrice,
             currency: "IDR",
