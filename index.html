@@ -1,0 +1,919 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <title>Mitsuki Printing — Nametag Custom</title>
+    <link rel="icon" type="image/png" href="logo.png" />
+    <meta
+      name="description"
+      content="Nametag custom berkualitas dengan finishing resin, tahan lama, dan magnet kuat. Pesan langsung lewat WhatsApp."
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+      rel="stylesheet"
+    />
+    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+
+    <style>
+      :root {
+        --cream: #fbf6ec;
+        --cream-deep: #f1e8d6;
+        --ink: #1c1a16;
+        --ink-soft: #4a463d;
+        --gold: #f2a93b;
+        --gold-deep: #c97f1b;
+        --plaque: #17160f;
+        --plaque-edge: #2a2818;
+        --brown: #8b5a3c;
+        --silver: #d8dadd;
+        --silver-dark: #9ca0a6;
+        --radius-lg: 22px;
+        --radius-sm: 12px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        background: var(--cream-deep);
+        color: var(--ink);
+        font-family: "Plus Jakarta Sans", sans-serif;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      .page-wrap {
+        max-width: 480px;
+        margin: 0 auto;
+        background: var(--cream);
+        min-height: 100vh;
+        box-shadow: 0 0 60px rgba(0, 0, 0, 0.06);
+        overflow: hidden;
+      }
+
+      /* ---------- Hero ---------- */
+      .hero-img {
+        width: 100%;
+        display: block;
+        height: auto;
+      }
+
+      .brand-head {
+        text-align: center;
+        padding: 28px 24px 8px;
+      }
+
+      .brand-head .wordmark {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        font-family: "Baloo 2", sans-serif;
+        font-weight: 700;
+        font-size: 1.9rem;
+        color: var(--ink);
+        margin: 0;
+        letter-spacing: 0.2px;
+      }
+
+      .brand-head .wordmark img {
+        width: 42px;
+        height: 42px;
+        object-fit: contain;
+        flex: 0 0 42px;
+      }
+
+      .brand-head .wordmark-name span {
+        color: var(--gold-deep);
+      }
+
+      .brand-head .tagline {
+        color: var(--ink-soft);
+        font-size: 0.95rem;
+        margin: 8px auto 0;
+        max-width: 34ch;
+        line-height: 1.5;
+      }
+
+      .flow-hint {
+        text-align: center;
+        color: var(--ink-soft);
+        font-size: 0.85rem;
+        margin: 10px 0 22px;
+      }
+
+      /* ---------- Progress dots ---------- */
+      .step-dots {
+        display: flex;
+        justify-content: center;
+        gap: 14px;
+        padding: 22px 0 18px;
+      }
+
+      .step-dot {
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        background: var(--silver);
+        border: 2px solid var(--silver-dark);
+        transition:
+          background 0.25s ease,
+          border-color 0.25s ease,
+          transform 0.25s ease;
+      }
+
+      .step-dot.is-active {
+        background: var(--gold);
+        border-color: var(--gold-deep);
+        transform: scale(1.15);
+      }
+
+      .step-dot.is-done {
+        background: var(--gold-deep);
+        border-color: var(--gold-deep);
+      }
+
+      /* ---------- Plaque card (the order form) ---------- */
+      .order-section {
+        padding: 0 20px 8px;
+      }
+
+      .plaque-card {
+        background: var(--plaque);
+        border: 2px solid var(--gold-deep);
+        border-radius: var(--radius-lg);
+        padding: 26px 22px 22px;
+        color: #f4efe3;
+        position: relative;
+      }
+
+      .step-eyebrow {
+        color: var(--gold);
+        font-family: "Baloo 2", sans-serif;
+        font-weight: 700;
+        font-size: 1.2rem;
+        margin: 0 0 6px;
+      }
+
+      .step-help {
+        color: #c9c4b6;
+        font-size: 0.88rem;
+        margin: 0 0 20px;
+        line-height: 1.5;
+      }
+
+      /* Qty stepper */
+      .qty-row {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 18px;
+        margin: 18px 0 8px;
+      }
+
+      .qty-btn {
+        width: 46px;
+        height: 46px;
+        border-radius: 50%;
+        border: 2px solid var(--gold);
+        background: transparent;
+        color: var(--gold);
+        font-size: 1.4rem;
+        line-height: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition:
+          transform 0.12s ease,
+          background 0.2s ease;
+      }
+      .qty-btn:active {
+        transform: scale(0.92);
+      }
+      .qty-btn:disabled {
+        opacity: 0.35;
+      }
+
+      .qty-value {
+        font-family: "Baloo 2", sans-serif;
+        font-size: 2.4rem;
+        font-weight: 700;
+        color: #fff;
+        min-width: 70px;
+        text-align: center;
+      }
+
+      .qty-meta {
+        text-align: center;
+        color: #c9c4b6;
+        font-size: 0.85rem;
+        margin-top: 6px;
+      }
+
+      .subtotal-pill {
+        display: block;
+        text-align: center;
+        margin: 18px auto 0;
+        background: rgba(242, 169, 59, 0.12);
+        border: 1px solid rgba(242, 169, 59, 0.4);
+        border-radius: var(--radius-sm);
+        padding: 10px 14px;
+        color: var(--gold);
+        font-weight: 600;
+        font-size: 0.95rem;
+      }
+
+      /* Radio pills (area) */
+      .area-choices {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        margin-bottom: 18px;
+      }
+
+      .area-pill {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 12px 8px;
+        border-radius: var(--radius-sm);
+        border: 2px solid #3a3826;
+        color: #e8e3d6;
+        font-weight: 600;
+        font-size: 0.9rem;
+        cursor: pointer;
+        transition:
+          border-color 0.2s ease,
+          background 0.2s ease,
+          color 0.2s ease;
+      }
+
+      .area-pill.is-selected {
+        border-color: var(--gold);
+        background: rgba(242, 169, 59, 0.14);
+        color: var(--gold);
+      }
+
+      .field-label {
+        display: block;
+        color: #e8e3d6;
+        font-size: 0.88rem;
+        font-weight: 600;
+        margin-bottom: 8px;
+      }
+
+      textarea.plaque-input {
+        width: 100%;
+        background: #0f0e09;
+        border: 2px solid #3a3826;
+        border-radius: var(--radius-sm);
+        color: #f4efe3;
+        padding: 12px 14px;
+        font-family: inherit;
+        font-size: 0.92rem;
+        resize: vertical;
+        min-height: 90px;
+      }
+
+      textarea.plaque-input:focus,
+      .area-pill:focus-within {
+        outline: 3px solid var(--gold);
+        outline-offset: 1px;
+        border-color: var(--gold);
+      }
+
+      textarea.plaque-input::placeholder {
+        color: #7a765f;
+      }
+
+      /* Shipping status card */
+      .ship-status {
+        border-radius: var(--radius-sm);
+        padding: 18px 16px;
+        text-align: center;
+        border: 2px solid;
+        transition:
+          border-color 0.3s ease,
+          background 0.3s ease;
+      }
+
+      .ship-status.is-free {
+        background: rgba(242, 169, 59, 0.14);
+        border-color: var(--gold);
+      }
+
+      .ship-status.is-pending {
+        background: rgba(255, 255, 255, 0.04);
+        border-color: #3a3826;
+      }
+
+      .ship-status .ship-icon {
+        font-size: 1.6rem;
+        color: var(--gold);
+      }
+
+      .ship-status .ship-title {
+        font-family: "Baloo 2", sans-serif;
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: #fff;
+        margin: 8px 0 4px;
+      }
+
+      .ship-status .ship-detail {
+        color: #c9c4b6;
+        font-size: 0.88rem;
+        line-height: 1.5;
+        margin: 0;
+      }
+
+      .btn-topup {
+        margin-top: 14px;
+        background: transparent;
+        border: 2px solid var(--gold);
+        color: var(--gold);
+        border-radius: 999px;
+        padding: 8px 18px;
+        font-weight: 600;
+        font-size: 0.85rem;
+      }
+
+      /* Summary (review step) */
+      .summary-list {
+        border-top: 1px solid #3a3826;
+        margin-top: 4px;
+      }
+
+      .summary-row {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 12px 0;
+        border-bottom: 1px solid #3a3826;
+        font-size: 0.9rem;
+      }
+
+      .summary-row .label {
+        color: #c9c4b6;
+      }
+      .summary-row .value {
+        color: #fff;
+        font-weight: 600;
+        text-align: right;
+      }
+
+      .summary-row.total .label,
+      .summary-row.total .value {
+        color: var(--gold);
+        font-family: "Baloo 2", sans-serif;
+        font-size: 1.05rem;
+      }
+
+      /* Nav buttons */
+      .step-nav {
+        display: flex;
+        gap: 12px;
+        margin-top: 24px;
+      }
+
+      .btn-gold,
+      .btn-outline-gold,
+      .btn-wa {
+        font-family: "Baloo 2", sans-serif;
+        font-weight: 700;
+        border-radius: 999px;
+        padding: 13px 20px;
+        font-size: 1rem;
+        border: none;
+        flex: 1;
+        transition:
+          transform 0.12s ease,
+          filter 0.2s ease;
+      }
+
+      .btn-gold,
+      .btn-wa {
+        background: var(--gold);
+        color: var(--plaque);
+        box-shadow: 0 6px 0 var(--gold-deep);
+      }
+
+      .btn-gold:active,
+      .btn-wa:active {
+        transform: translateY(4px);
+        box-shadow: 0 2px 0 var(--gold-deep);
+      }
+
+      .btn-gold:disabled {
+        filter: grayscale(0.5);
+        opacity: 0.5;
+        box-shadow: 0 6px 0 rgba(201, 127, 27, 0.4);
+      }
+
+      .btn-outline-gold {
+        background: transparent;
+        color: var(--gold);
+        border: 2px solid var(--gold);
+        flex: 0 0 auto;
+        padding: 13px 22px;
+      }
+
+      .btn-wa {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        width: 100%;
+        text-decoration: none;
+      }
+
+      .wa-note {
+        text-align: center;
+        color: var(--ink-soft);
+        font-size: 0.82rem;
+        margin-top: 12px;
+      }
+
+      .validation-hint {
+        text-align: center;
+        color: var(--gold);
+        font-size: 0.82rem;
+        margin-top: 10px;
+        min-height: 1.2em;
+      }
+
+      /* ---------- Trust strip ---------- */
+      .trust-strip {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 6px;
+        padding: 34px 18px 14px;
+      }
+
+      .trust-item {
+        text-align: center;
+        color: var(--ink-soft);
+      }
+
+      .trust-item .icon {
+        width: 46px;
+        height: 46px;
+        margin: 0 auto 10px;
+        border-radius: 50%;
+        background: rgba(242, 169, 59, 0.18);
+        color: var(--gold-deep);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+      }
+
+      .trust-item .label {
+        font-size: 0.74rem;
+        font-weight: 600;
+        line-height: 1.3;
+        color: var(--ink);
+      }
+
+      /* ---------- Footer ---------- */
+      .site-footer {
+        text-align: center;
+        padding: 18px 20px 30px;
+        color: var(--ink-soft);
+        font-size: 0.78rem;
+      }
+
+      a,
+      button {
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      button:focus-visible,
+      a:focus-visible,
+      .area-pill:focus-within {
+        outline: 3px solid var(--gold-deep);
+        outline-offset: 2px;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          animation: none !important;
+          transition: none !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page-wrap">
+      <img
+        src="6118241726053945765.jpg"
+        alt="Contoh Nametag Custom Mitsuki Printing dengan finishing resin dan magnet"
+        class="hero-img"
+        data-aos="fade-in"
+      />
+
+      <div class="brand-head" data-aos="fade-up" data-aos-delay="80">
+        <p class="wordmark">
+          <img src="logo.png" alt="Logo Mitsuki Printing" />
+          <span class="wordmark-name">Mitsuki <span>Printing</span></span>
+        </p>
+        <p class="tagline">
+          Nametag berkualitas dengan finishing resin yang elegan dan tahan lama.
+        </p>
+      </div>
+
+      <p class="flow-hint">
+        Ikuti 4 langkah mudah di bawah ini untuk memesan nametag custom kamu.
+      </p>
+
+      <div
+        class="step-dots"
+        role="progressbar"
+        aria-valuemin="1"
+        aria-valuemax="4"
+        id="stepDots"
+      >
+        <span class="step-dot" data-dot="1"></span>
+        <span class="step-dot" data-dot="2"></span>
+        <span class="step-dot" data-dot="3"></span>
+        <span class="step-dot" data-dot="4"></span>
+      </div>
+
+      <section class="order-section">
+        <div class="plaque-card">
+          <!-- Step 1: Jumlah -->
+          <div class="step-panel" data-step="1">
+            <p class="step-eyebrow">Berapa banyak yang mau dipesan?</p>
+            <p class="step-help">
+              Minimal pemesanan 5 pcs. Ketuk tombol + atau − untuk mengatur
+              jumlah.
+            </p>
+
+            <div class="qty-row">
+              <button
+                class="qty-btn"
+                id="qtyMinusBtn"
+                aria-label="Kurangi jumlah"
+              >
+                −
+              </button>
+              <span class="qty-value" id="qtyValue">5</span>
+              <button
+                class="qty-btn"
+                id="qtyPlusBtn"
+                aria-label="Tambah jumlah"
+              >
+                +
+              </button>
+            </div>
+            <p class="qty-meta">Rp15.000 / pcs</p>
+
+            <span class="subtotal-pill" id="subtotalPill"
+              >Subtotal: Rp75.000</span
+            >
+
+            <div class="step-nav">
+              <button class="btn-gold btn-next">Lanjut</button>
+            </div>
+          </div>
+
+          <!-- Step 2: Alamat -->
+          <div class="step-panel" data-step="2" style="display: none">
+            <p class="step-eyebrow">Alamat pengiriman ke mana?</p>
+            <p class="step-help">
+              Pilih wilayah pengiriman, lalu tulis alamat lengkapmu.
+            </p>
+
+            <div class="area-choices">
+              <label class="area-pill" data-area="dalam">Dalam Gorontalo</label>
+              <label class="area-pill" data-area="luar">Luar Gorontalo</label>
+            </div>
+
+            <label class="field-label" for="addressField">Detail alamat</label>
+            <textarea
+              id="addressField"
+              class="plaque-input"
+              placeholder="Tulis alamat lengkap, termasuk kecamatan dan patokan terdekat."
+            ></textarea>
+
+            <div class="step-nav">
+              <button class="btn-outline-gold btn-back">Kembali</button>
+              <button class="btn-gold btn-next" id="step2NextBtn">
+                Lanjut
+              </button>
+            </div>
+            <p class="validation-hint" id="step2Hint"></p>
+          </div>
+
+          <!-- Step 3: Ongkir -->
+          <div class="step-panel" data-step="3" style="display: none">
+            <p class="step-eyebrow">Info ongkir pesananmu</p>
+            <p class="step-help">
+              Ongkir dihitung otomatis dari jumlah pesanan dan wilayah tujuan.
+            </p>
+
+            <div class="ship-status is-pending" id="shipStatus">
+              <i class="bi bi-truck ship-icon"></i>
+              <p class="ship-title" id="shipTitle">Belum gratis ongkir</p>
+              <p class="ship-detail" id="shipDetail"></p>
+              <button
+                class="btn-topup"
+                id="topUpBtn"
+                style="display: none"
+              ></button>
+            </div>
+
+            <div class="step-nav">
+              <button class="btn-outline-gold btn-back">Kembali</button>
+              <button class="btn-gold btn-next">Lanjut</button>
+            </div>
+          </div>
+
+          <!-- Step 4: Ringkasan & Checkout -->
+          <div class="step-panel" data-step="4" style="display: none">
+            <p class="step-eyebrow">Cek pesananmu</p>
+            <p class="step-help">
+              Pastikan detail pesanan sudah sesuai sebelum checkout.
+            </p>
+
+            <div class="summary-list">
+              <div class="summary-row">
+                <span class="label">Jumlah</span>
+                <span class="value" id="sumQty">5 pcs</span>
+              </div>
+              <div class="summary-row">
+                <span class="label">Harga satuan</span>
+                <span class="value">Rp15.000</span>
+              </div>
+              <div class="summary-row">
+                <span class="label">Wilayah</span>
+                <span class="value" id="sumArea">—</span>
+              </div>
+              <div class="summary-row">
+                <span class="label">Alamat</span>
+                <span class="value" id="sumAddress">—</span>
+              </div>
+              <div class="summary-row">
+                <span class="label">Status ongkir</span>
+                <span class="value" id="sumShipStatus">—</span>
+              </div>
+              <div class="summary-row total">
+                <span class="label">Subtotal produk</span>
+                <span class="value" id="sumSubtotal">Rp75.000</span>
+              </div>
+            </div>
+
+            <div class="step-nav mb-3">
+              <a
+                class="btn-wa"
+                id="waBtn"
+                href="#"
+                target="_blank"
+                rel="noopener"
+              >
+                <i class="bi bi-whatsapp"></i> Pesan via WhatsApp
+              </a>
+            </div>
+
+            <button class="btn-outline-gold btn-back w-100 mb-3">Kembali</button>
+            <p class="wa-note">
+              Kamu akan diarahkan ke WhatsApp Mitsuki Printing untuk konfirmasi
+              pesanan.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <footer class="site-footer">Powered By Entercode Technology</footer>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <script>
+      $(function () {
+        var state = {
+          step: 1,
+          qty: 5,
+          area: "",
+          address: "",
+          unitPrice: 15000,
+          waNumber: "6285137087857",
+        };
+
+        function formatRupiah(n) {
+          return "Rp" + n.toLocaleString("id-ID");
+        }
+
+        function minFreeQty() {
+          if (state.area === "dalam") return 10;
+          if (state.area === "luar") return 20;
+          return null;
+        }
+
+        function isFreeShipping() {
+          var m = minFreeQty();
+          return m !== null && state.qty >= m;
+        }
+
+        function areaLabel() {
+          if (state.area === "dalam") return "Dalam Gorontalo";
+          if (state.area === "luar") return "Luar Gorontalo";
+          return "";
+        }
+
+        function step2Valid() {
+          return state.area !== "" && state.address.trim().length > 0;
+        }
+
+        function buildWaLink() {
+          var status = isFreeShipping()
+            ? "Gratis ongkir"
+            : "Ongkir dikonfirmasi admin";
+          var lines = [
+            "Halo Mitsuki Printing, saya ingin memesan Nametag Custom:",
+            "",
+            "- Jumlah: " + state.qty + " pcs",
+            "- Harga satuan: " + formatRupiah(state.unitPrice),
+            "- Subtotal: " + formatRupiah(state.qty * state.unitPrice),
+            "- Wilayah: " + areaLabel(),
+            "- Alamat: " + state.address,
+            "- Status ongkir: " + status,
+            "",
+            "Mohon info selanjutnya, terima kasih.",
+          ];
+          return (
+            "https://wa.me/" +
+            state.waNumber +
+            "?text=" +
+            encodeURIComponent(lines.join("\n"))
+          );
+        }
+
+        function showStep(n) {
+          $(".step-panel").each(function () {
+            var isTarget = $(this).data("step") === n;
+            if (isTarget) {
+              $(this).hide().fadeIn(180);
+            } else {
+              $(this).hide();
+            }
+          });
+        }
+
+        function render(justChangedStep) {
+          // progress dots
+          $(".step-dot").each(function () {
+            var n = $(this).data("dot");
+            $(this).toggleClass("is-active", n === state.step);
+            $(this).toggleClass("is-done", n < state.step);
+          });
+
+          if (justChangedStep) {
+            showStep(state.step);
+          }
+
+          // step 1: qty
+          $("#qtyValue").text(state.qty);
+          $("#qtyMinusBtn").prop("disabled", state.qty <= 5);
+          $("#subtotalPill").text(
+            "Subtotal: " + formatRupiah(state.qty * state.unitPrice),
+          );
+
+          // step 2: area + address
+          $(".area-pill").removeClass("is-selected");
+          if (state.area) {
+            $('.area-pill[data-area="' + state.area + '"]').addClass(
+              "is-selected",
+            );
+          }
+          $("#step2NextBtn").prop("disabled", !step2Valid());
+          $("#step2Hint").text(
+            step2Valid()
+              ? ""
+              : "Lengkapi wilayah dan alamat untuk melanjutkan.",
+          );
+
+          // step 3: ongkir
+          var free = isFreeShipping();
+          var m = minFreeQty();
+          $("#shipStatus")
+            .toggleClass("is-free", free)
+            .toggleClass("is-pending", !free);
+          $("#shipTitle").text(free ? "Gratis ongkir!" : "Belum gratis ongkir");
+
+          if (!state.area) {
+            $("#shipDetail").text(
+              "Pilih wilayah pengiriman dulu di langkah sebelumnya.",
+            );
+            $("#topUpBtn").hide();
+          } else if (free) {
+            $("#shipDetail").text(
+              "Pesanan " +
+                state.qty +
+                " pcs ke " +
+                areaLabel() +
+                " sudah memenuhi minimal " +
+                m +
+                " pcs untuk gratis ongkir.",
+            );
+            $("#topUpBtn").hide();
+          } else {
+            var remain = m - state.qty;
+            $("#shipDetail").text(
+              "Tambah " +
+                remain +
+                " pcs lagi agar pesananmu ke " +
+                areaLabel() +
+                " dapat gratis ongkir (minimal " +
+                m +
+                " pcs).",
+            );
+            $("#topUpBtn")
+              .text("Tambahkan jadi " + m + " pcs")
+              .show();
+          }
+
+          // step 4: summary
+          $("#sumQty").text(state.qty + " pcs");
+          $("#sumArea").text(areaLabel() || "—");
+          $("#sumAddress").text(state.address || "—");
+          $("#sumShipStatus").text(
+            free ? "Gratis ongkir" : "Ongkir dikonfirmasi admin",
+          );
+          $("#sumSubtotal").text(formatRupiah(state.qty * state.unitPrice));
+          $("#waBtn").attr("href", buildWaLink());
+        }
+
+        // ---- event handlers ----
+
+        $("#qtyPlusBtn").on("click", function () {
+          state.qty++;
+          render(false);
+        });
+
+        $("#qtyMinusBtn").on("click", function () {
+          if (state.qty > 5) {
+            state.qty--;
+            render(false);
+          }
+        });
+
+        $(".area-pill").on("click", function () {
+          state.area = $(this).data("area");
+          render(false);
+        });
+
+        $("#addressField").on("input", function () {
+          state.address = $(this).val();
+          render(false);
+        });
+
+        $("#topUpBtn").on("click", function () {
+          var m = minFreeQty();
+          if (m) {
+            state.qty = m;
+            render(false);
+          }
+        });
+
+        $(".btn-next").on("click", function () {
+          if (state.step === 2 && !step2Valid()) return;
+          state.step = Math.min(state.step + 1, 4);
+          render(true);
+        });
+
+        $(".btn-back").on("click", function () {
+          state.step = Math.max(state.step - 1, 1);
+          render(true);
+        });
+
+        // initial paint
+        render(false);
+        AOS.init({ duration: 700, once: true });
+      });
+    </script>
+  </body>
+</html>
