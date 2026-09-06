@@ -524,29 +524,58 @@
         }
       }
     </style>
+    <!-- Meta Pixel Code -->
+    <script>
+      !(function (f, b, e, v, n, t, s) {
+        if (f.fbq) return;
+        n = f.fbq = function () {
+          n.callMethod
+            ? n.callMethod.apply(n, arguments)
+            : n.queue.push(arguments);
+        };
+        if (!f._fbq) f._fbq = n;
+        n.push = n;
+        n.loaded = !0;
+        n.version = "2.0";
+        n.queue = [];
+        t = b.createElement(e);
+        t.async = !0;
+        t.src = v;
+        s = b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t, s);
+      })(
+        window,
+        document,
+        "script",
+        "https://connect.facebook.net/en_US/fbevents.js",
+      );
+      fbq("init", "2271492623647809");
+      fbq("track", "PageView");
+    </script>
+    <noscript
+      ><img
+        height="1"
+        width="1"
+        style="display: none"
+        src="https://www.facebook.com/tr?id=2271492623647809&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- End Meta Pixel Code -->
   </head>
   <body>
     <div class="page-wrap">
+      <div class="brand-head mb-3" data-aos="fade-up" data-aos-delay="80">
+        <p class="wordmark">
+          <img src="logo.png" alt="Logo Mitsuki Printing" />
+          <span class="wordmark-name">Mitsuki <span>Printing</span></span>
+        </p>
+      </div>
+
       <img
         src="6118241726053945765.jpg"
         alt="Contoh Nametag Custom Mitsuki Printing dengan finishing resin dan magnet"
         class="hero-img"
         data-aos="fade-in"
       />
-
-      <div class="brand-head" data-aos="fade-up" data-aos-delay="80">
-        <p class="wordmark">
-          <img src="logo.png" alt="Logo Mitsuki Printing" />
-          <span class="wordmark-name">Mitsuki <span>Printing</span></span>
-        </p>
-        <p class="tagline">
-          Nametag berkualitas dengan finishing resin yang elegan dan tahan lama.
-        </p>
-      </div>
-
-      <p class="flow-hint">
-        Ikuti 4 langkah mudah di bawah ini untuk memesan nametag custom kamu.
-      </p>
 
       <div
         class="step-dots"
@@ -697,7 +726,9 @@
               </a>
             </div>
 
-            <button class="btn-outline-gold btn-back w-100 mb-3">Kembali</button>
+            <button class="btn-outline-gold btn-back w-100 mb-3">
+              Kembali
+            </button>
             <p class="wa-note">
               Kamu akan diarahkan ke WhatsApp Mitsuki Printing untuk konfirmasi
               pesanan.
@@ -720,7 +751,7 @@
           area: "",
           address: "",
           unitPrice: 15000,
-          waNumber: "6285137087857",
+          waNumber: "6285696244597",
         };
 
         function formatRupiah(n) {
@@ -908,6 +939,18 @@
         $(".btn-back").on("click", function () {
           state.step = Math.max(state.step - 1, 1);
           render(true);
+        });
+
+        $("#waBtn").on("click", function () {
+          if ($(this).attr("href") === "#") return;
+
+          fbq("track", "Contact", {
+            content_name: "Pesan Nametag Custom via WhatsApp",
+            value: state.qty * state.unitPrice,
+            currency: "IDR",
+            num_items: state.qty,
+            shipping_area: areaLabel(),
+          });
         });
 
         // initial paint
